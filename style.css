@@ -1,81 +1,136 @@
-/* style.css */
-
-body {
-    font-family: 'Lato', sans-serif;
-    background-color: #ECF0F1;
+/* CSS Reset */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-size: 100%;
+    line-height: 1.5;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.5;
+    border: none;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* General body styles */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
 
-.container {
-    background-color: #FFFFFF;
+/* Styles for the main container */
+#container {
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    max-width: 100%;
-}
-
-h1 {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 500px; /* Fix the container width */
     text-align: center;
-    color: #2C3E50;
-    margin-bottom: 20px;
 }
 
+/* Flexbox container to align input and button in one row */
 .task-input {
     display: flex;
     justify-content: space-between;
-}
-
-#new-task {
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #BDC3C7;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-#add-task-btn {
-    background-color: #E67E22;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#task-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
-.task-item {
-    background-color: #F7F9FA;
-    border: 1px solid #BDC3C7;
-    padding: 10px;
-    border-radius: 5px;
+    width: 100%;
     margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.task-item.completed {
-    text-decoration: line-through;
-    color: #95A5A6;
-}
-
-.task-item button {
-    background-color: #E74C3C;
-    color: white;
-    border: none;
-    padding: 5px 10px;
+/* Input field styles */
+input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    margin-right: 10px;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 40px;
+}
+
+/* Button styles (Add) */
+button {
+    padding: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #5a67d8;
+    color: white;
+    font-size: 16px;
     cursor: pointer;
+    height: 40px;
+    width: 100px;
+}
+
+button:hover {
+    background-color: #4c51bf;
+}
+
+/* Task item (li) styles */
+li {
+    display: flex; /* Используем flex для задач */
+    justify-content: space-between; /* Текст задачи слева, кнопка справа */
+    align-items: center; /* Выравнивание по вертикали */
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    width: 100%; /* Ширина задачи */
+    margin-left: 0; /* Выровняем по левому краю */
+}
+
+/* Task text (span) styles */
+li span {
+    flex-grow: 1; /* Заставляем текст заполнять оставшееся пространство */
+    text-align: left; /* Выравниваем текст по левому краю */
+    line-height: 40px; /* Совпадает с высотой кнопок */
+}
+
+/* Delete button styles */
+li button {
+    width: 100px; /* Ширина кнопки удаления */
+    height: 40px; /* Высота кнопки совпадает с кнопкой добавления */
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center; /* Горизонтальное выравнивание текста */
+    align-items: center; /* Вертикальное выравнивание текста */
+}
+
+li button:hover {
+    background-color: #c0392b;
 }

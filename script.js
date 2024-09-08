@@ -1,21 +1,40 @@
-// script.js
+// Get the input field
+const inputField = document.querySelector('input[type="text"]');
 
-document.getElementById('add-task-btn').addEventListener('click', function() {
-    const taskText = document.getElementById('new-task').value;
-    if (taskText === '') return;
+// Get the button
+const addButton = document.querySelector('button');
 
-    const taskItem = document.createElement('li');
-    taskItem.className = 'task-item';
-    taskItem.textContent = taskText;
+// Get the task list (ul)
+const taskList = document.querySelector('#task-list');
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.addEventListener('click', function() {
-        taskItem.remove();
+// Function to add a new task
+addButton.addEventListener('click', function() {
+    const taskText = inputField.value;
+
+    if (taskText === '') {
+        alert('Please enter a task');
+        return;
+    }
+
+    const newTask = document.createElement('li');
+    newTask.textContent = taskText;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.style.marginLeft = '10px';
+    deleteButton.style.backgroundColor = '#e74c3c';
+    deleteButton.style.color = 'white';
+    deleteButton.style.border = 'none';
+    deleteButton.style.cursor = 'pointer';
+    deleteButton.style.borderRadius = '5px';
+    deleteButton.style.height = '40px'; // Устанавливаем одинаковую высоту
+    deleteButton.style.width = '100px'; // Устанавливаем ширину, если нужно
+
+    newTask.appendChild(deleteButton);
+    taskList.appendChild(newTask);
+    inputField.value = '';
+
+    deleteButton.addEventListener('click', function() {
+        taskList.removeChild(newTask);
     });
-
-    taskItem.appendChild(deleteBtn);
-    document.getElementById('task-list').appendChild(taskItem);
-
-    document.getElementById('new-task').value = ''; // Очистка поля ввода
 });
