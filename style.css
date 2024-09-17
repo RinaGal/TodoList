@@ -59,7 +59,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 500px; /* Fix the container width */
+    width: 500px;
     text-align: center;
 }
 
@@ -101,34 +101,34 @@ button:hover {
 
 /* Task item (li) styles */
 li {
-    display: flex; /* Используем flex для задач */
-    justify-content: space-between; /* Текст задачи слева, кнопка справа */
-    align-items: center; /* Выравнивание по вертикали */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Ensures correct vertical alignment */
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    width: 100%; /* Ширина задачи */
-    margin-left: 0; /* Выровняем по левому краю */
+    width: 100%;
 }
 
 /* Task text (span) styles */
 li span {
-    flex-grow: 1; /* Заставляем текст заполнять оставшееся пространство */
-    text-align: left; /* Выравниваем текст по левому краю */
-    line-height: 40px; /* Совпадает с высотой кнопок */
+    flex-grow: 1;
+    text-align: left;
+    white-space: normal; /* Allow the text to wrap */
+    word-wrap: break-word; /* Break words if too long */
+    overflow-wrap: break-word; /* Support for older browsers */
+    line-height: 1.2; /* Adjust the line spacing */
+    margin-right: 10px; /* Adds spacing between text and delete button */
 }
 
 /* Delete button styles */
 li button {
-    width: 100px; /* Ширина кнопки удаления */
-    height: 40px; /* Высота кнопки совпадает с кнопкой добавления */
+    width: 100px;
+    height: 40px;
     background-color: #e74c3c;
     color: white;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    display: flex;
-    justify-content: center; /* Горизонтальное выравнивание текста */
-    align-items: center; /* Вертикальное выравнивание текста */
 }
 
 li button:hover {
