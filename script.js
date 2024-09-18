@@ -1,19 +1,17 @@
-// Get the input field
+// Get the input field, button, and task list
 const inputField = document.querySelector('input[type="text"]');
-
-// Get the button
 const addButton = document.querySelector('button');
-
-// Get the task list (ul)
 const taskList = document.querySelector('#task-list');
+const categorySelect = document.querySelector('#category');
 
 // Function to save tasks to localStorage
 function saveTasks() {
     const tasks = [];
     document.querySelectorAll('#task-list li').forEach(taskItem => {
         const taskText = taskItem.querySelector('span').textContent;
-        const isCompleted = taskItem.classList.contains('completed'); // Check if task is completed
-        tasks.push({ text: taskText, completed: isCompleted });
+        const taskCategory = taskItem.querySelector('.category').textContent;
+        const isCompleted = taskItem.classList.contains('completed');
+        tasks.push({ text: taskText, category: taskCategory, completed: isCompleted });
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
@@ -23,17 +21,24 @@ function loadTasks() {
     const savedTasks = JSON.parse(localStorage.getItem('tasks'));
     if (savedTasks) {
         savedTasks.forEach(task => {
-            addTask(task.text, task.completed); // Load task with its completed status
+            addTask(task.text, task.category, task.completed);
         });
     }
 }
 
-// Function to add a task (used for both adding and loading tasks)
-function addTask(taskText, isCompleted = false) {
+// Function to add a task
+function addTask(taskText, taskCategory, isCompleted = false) {
     const newTask = document.createElement('li');
 
     const taskSpan = document.createElement('span');
     taskSpan.textContent = taskText;
+
+    const categorySpan = document.createElement('span');
+    categorySpan.textContent = taskCategory;
+    categorySpan.classList.add('category');
+    categorySpan.style.marginLeft = '10px';
+    categorySpan.style.fontStyle = 'italic';
+    categorySpan.style.color = '#888';
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
@@ -56,19 +61,19 @@ function addTask(taskText, isCompleted = false) {
     const completeButton = document.createElement('button');
     completeButton.textContent = isCompleted ? 'Uncomplete' : 'Complete';
     completeButton.style.marginLeft = '10px';
-    completeButton.style.backgroundColor = isCompleted ? '#95a5a6' : '#2ecc71'; // Gray for completed, green for incomplete
+    completeButton.style.backgroundColor = isCompleted ? '#95a5a6' : '#2ecc71';
     completeButton.style.color = 'white';
     completeButton.style.border = 'none';
     completeButton.style.cursor = 'pointer';
     completeButton.style.borderRadius = '5px';
 
-    // Apply completed style if task is already completed
     if (isCompleted) {
         newTask.classList.add('completed');
-        taskSpan.style.textDecoration = 'line-through'; // Strikethrough for completed task
+        taskSpan.style.textDecoration = 'line-through';
     }
 
     newTask.appendChild(taskSpan);
+    newTask.appendChild(categorySpan);
     newTask.appendChild(completeButton);
     newTask.appendChild(editButton);
     newTask.appendChild(deleteButton);
@@ -78,7 +83,7 @@ function addTask(taskText, isCompleted = false) {
     // Delete task
     deleteButton.addEventListener('click', function() {
         taskList.removeChild(newTask);
-        saveTasks(); // Save tasks after deletion
+        saveTasks();
     });
 
     // Edit task
@@ -86,7 +91,7 @@ function addTask(taskText, isCompleted = false) {
         const newText = prompt('Edit your task:', taskSpan.textContent);
         if (newText !== null && newText.trim() !== '') {
             taskSpan.textContent = newText;
-            saveTasks(); // Save tasks after editing
+            saveTasks();
         }
     });
 
@@ -97,24 +102,32 @@ function addTask(taskText, isCompleted = false) {
         taskSpan.style.textDecoration = isNowCompleted ? 'line-through' : 'none';
         completeButton.textContent = isNowCompleted ? 'Uncomplete' : 'Complete';
         completeButton.style.backgroundColor = isNowCompleted ? '#95a5a6' : '#2ecc71';
-        saveTasks(); // Save tasks after marking as completed/incomplete
+        saveTasks();
     });
 
-    saveTasks(); // Save tasks after adding
+    saveTasks();
 }
 
 // Add new task on button click
 addButton.addEventListener('click', function() {
     const taskText = inputField.value;
+    const taskCategory = categorySelect.value;
 
     if (taskText === '') {
         alert('Please enter a task');
         return;
     }
 
-    addTask(taskText); // Add the task
+    if (taskCategory === '') {
+        alert('Please select a category');
+        return;
+    }
 
+    addTask(taskText, taskCategory);
+
+    // Сброс поля ввода и категории
     inputField.value = ''; // Clear the input field
+    categorySelect.value = ''; // Reset the category selection
 });
 
 // Load tasks from localStorage when the page loads

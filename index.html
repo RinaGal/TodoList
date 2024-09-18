@@ -10,20 +10,27 @@
     </title>    
 </head>
 <body>
+   
+    
     <div id="container">
         <h1>My Tasks</h1>
         <div class="task-input">
             <input type="text" placeholder="Enter a new task">
+            <select id="category">
+                <option value="" disabled selected hidden>Select category</option> <!-- placeholder по умолчанию -->
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Other">Other</option>
+            </select>
             <button>Add</button>
         </div>
-
-         <ul id="task-list"></ul>
-
+    
+        <ul id="task-list"></ul>
     </div>
-
-
-
-
+    
+    
+    
 
     <script src="script.js"></script>
 </body>
