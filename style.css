@@ -13,44 +13,13 @@ html, body {
 
 body {
     font-family: 'Lato', sans-serif;
-}
-
-img, picture, video, canvas, svg {
-    display: block;
-    max-width: 100%;
-}
-
-button, input, select, textarea {
-    font-family: inherit;
-    font-size: 100%;
-    line-height: 1.5;
-    border: none;
-    outline: none;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul, ol {
-    list-style: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-/* General body styles */
-body {
-    font-family: 'Lato', sans-serif;
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    padding: 20px;
 }
 
 /* Main container styles */
@@ -59,117 +28,234 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 700px; /* Увеличили ширину контейнера */
+    width: 600px;
+    max-width: 100%;
     text-align: center;
-    display: grid;
-    grid-gap: 20px;
 }
 
-/* Grid layout for the task input, select, and button */
+/* Heading styles */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Task input container styles */
 .task-input {
-    display: grid;
-    grid-template-columns: 3fr 1fr auto; /* Поле ввода, категория, кнопка */
-    grid-gap: 10px; /* Промежуток между элементами */
-    width: 100%; /* Занимает всю ширину контейнера */
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 /* Input field styles */
 input[type="text"] {
+    width: 100%;
     padding: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
-    height: 40px;
-    width: 100%;
-    box-sizing: border-box;
+}
+
+/* Container for category select and add button using Grid */
+.input-controls {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 10px;
+    align-items: center;
 }
 
 /* Select field styles */
 select {
+    width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
-    height: 40px;
     color: #888;
+    background-color: #fff;
+    background-image: linear-gradient(45deg, transparent 50%, #333 50%), linear-gradient(135deg, #333 50%, transparent 50%);
+    background-position: calc(100% - 15px) center, calc(100% - 10px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    appearance: none;
 }
 
-/* Add button styles */
+/* Button styles */
 button {
-    padding: 10px 20px;
+    padding: 10px;
+    border: none;
     border-radius: 5px;
     background-color: #5a67d8;
     color: white;
     font-size: 16px;
     cursor: pointer;
-    border: none;
-    height: 40px;
+    white-space: nowrap;
+    width: 100%;
 }
 
+/* Button hover effect */
 button:hover {
     background-color: #4c51bf;
 }
 
-/* Task list styles */
+/* Task list container styles */
 #task-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-gap: 15px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 15px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Grid layout for task items */
-li {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 5px;
+/* Task item styles */
+#task-list li {
     display: grid;
-    grid-template-columns: 3fr 1fr auto auto auto; /* 2 части для текста, 1 для категории, кнопки */
-    grid-gap: 10px;
+    grid-template-columns: 2fr auto auto auto auto; /* Desktop version layout */
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    gap: 5px;
+}
+
+/* Styles for task text */
+#task-list li span {
+    font-size: 16px;
+    text-align: left;
+    color: #4c51bf;
+}
+
+/* Styles for task category */
+#task-list li .category {
+    font-style: italic;
+    color: #666;
+    margin-left: 0;
+}
+
+/* Styles for task buttons */
+#task-list li .complete-button,
+#task-list li .edit-button,
+#task-list li .delete-button {
+    display: inline-block;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+    width: auto; /* Auto width for desktop view */
+    text-align: center;
+}
+
+/* Complete button */
+#task-list li .complete-button {
+    background-color: #2ecc71;
+}
+
+#task-list li .complete-button:hover {
+    background-color: #27ae60;
+}
+
+/* Edit button */
+#task-list li .edit-button {
+    background-color: #3498db;
+}
+
+#task-list li .edit-button:hover {
+    background-color: #2980b9;
+}
+
+/* Delete button */
+#task-list li .delete-button {
+    background-color: #e74c3c;
+}
+
+#task-list li .delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Flexbox container for sorting and deleting */
+.sort-delete-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 10px;
+    align-items: center;
+    margin: 10px 0;
+    padding: 5px 17px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Sorting task styles */
+.sort-tasks {
+    display: flex;
     align-items: center;
 }
 
-/* Text in task */
-li span {
-    text-align: left;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-}
-
-/* Category span styles */
-li .category {
-    font-style: italic;
-    color: #888;
-}
-
-/* Button styles for task items */
-li button {
-    padding: 5px 10px;
-    border-radius: 5px;
+.sort-tasks label {
+    margin-right: 5px;
     font-size: 14px;
-    cursor: pointer;
-    border: none;
-    height: 40px; /* Фиксированная высота */
-    width: auto;
 }
 
-li button.delete {
+.sort-tasks select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* Delete Completed button styles */
+#delete-completed {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
     background-color: #e74c3c;
     color: white;
+    cursor: pointer;
+    font-size: 14px;
 }
 
-li button.edit {
-    background-color: #3498db;
-    color: white;
+#delete-completed:hover {
+    background-color: #c0392b;
 }
 
-li button.complete {
-    background-color: #2ecc71;
-    color: white;
-}
+/* Media Query for Tablets and Mobile Devices */
+@media (max-width: 768px) {
+    #task-list li {
+        display: grid;
+        grid-template-columns: 1fr; /* Single column layout for mobile view */
+        grid-template-rows: auto auto auto; /* Three rows: task, category, buttons */
+        grid-template-areas:
+            "task"
+            "category"
+            "buttons"; /* Define areas */
+        padding: 10px;
+        gap: 10px; /* Space between task, category, and buttons */
+    }
 
-li button:hover {
-    opacity: 0.9;
+    /* Task text area */
+    #task-list li span {
+        grid-area: task; /* Place task text in the task area */
+    }
+
+    /* Category area */
+    #task-list li .category {
+        grid-area: category; /* Place category in the category area */
+        margin-top: 5px; /* Add top margin for separation */
+    }
+
+    /* Buttons area */
+    #task-list li .complete-button,
+    #task-list li .edit-button,
+    #task-list li .delete-button {
+        grid-area: buttons; /* Place buttons in the buttons area */
+        display: block; /* Block for full-width buttons */
+        width: 100%; /* Ensure all buttons take full width */
+        margin: 5px 0; /* Margin for spacing */
+    }
 }

@@ -5,32 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>
-        TodoList
-    </title>    
+    <title>TodoList</title>    
 </head>
 <body>
-   
-    
     <div id="container">
         <h1>My Tasks</h1>
         <div class="task-input">
             <input type="text" placeholder="Enter a new task">
-            <select id="category">
-                <option value="" disabled selected hidden>Select category</option> <!-- placeholder по умолчанию -->
-                <option value="Work">Work</option>
-                <option value="Personal">Personal</option>
-                <option value="Shopping">Shopping</option>
-                <option value="Other">Other</option>
-            </select>
-            <button>Add</button>
+            
+            <!-- Container for category selection and Add button -->
+            <div class="input-controls">
+                <select id="category">
+                    <option value="" disabled selected hidden>Select category</option>
+                    <option value="Work">Work</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button>Add</button>
+            </div>
         </div>
-    
-        <ul id="task-list"></ul>
+
+        <!-- Container for sorting and delete completed tasks -->
+        <div class="sort-delete-container">
+            <div class="sort-tasks">
+                <label for="sort">Sort:</label>
+                <select id="sort">
+                    <option value="date">Date Created</option>
+                    <option value="alphabetical">Alphabetical (A-Z)</option>
+                    <option value="reverse-alphabetical">Alphabetical (Z-A)</option>
+                    <option value="category">Category</option>
+                </select>
+            </div>
+            <button id="delete-completed">Delete Completed</button>
+        </div>
+
+        <!-- This is where the tasks are displayed -->
+        <ul id="task-list">
+            <!-- Example task structure -->
+            <li>
+                <span>Task Description</span> 
+                <span class="category">Work</span>
+                <button class="complete-button">Complete</button>
+                <button class="edit-button">Edit</button>
+                <button class="delete-button">Delete</button>
+            </li>
+            <!-- Additional tasks will be added here dynamically -->
+        </ul>
     </div>
-    
-    
-    
 
     <script src="script.js"></script>
 </body>
